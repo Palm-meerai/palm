@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลเช็คชื่อ</title>
+</head>
+<body>
+    <!-- https://classroom.google.com/u/1/c/NjkwODk4NzU5ODQ5/m/NzIyODI3NjM3NDc4/details -->
+    <h1>ข้อมูลเช็คชื่อ</h1>
+    <table>
+        <tr>
+            <th>ขื่อ</th>
+            <th>นามสกุล</th>
+            <th>หลักสูตร</th>
+            <th>วันที่เช็คชื่อ</th>
+            <th>Status</th>
+
+        </tr>
+<!-- https://classroom.google.com/u/1/c/NjkwODk4NzU5ODQ5/m/NzIyODI3NzYzNjE2/details -->
+        <% attendanceList.forEach(record => { %>
+            <tr>
+                <td><%= record.first_name %></td>
+                <td><%= record.last_name %></td>
+                <td><%= record.short_name_th %></td>
+                <td>
+                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat -->
+                    <%= new Intl.DateTimeFormat('th-TH', { <!-- สร้าง DateTimeFormat ให้ใช้ภาษาของประเทศไทย (th-TH) -->
+                        year: 'numeric', <!-- แสดงปีในรูปแบบตัวเลข -->
+                        month: 'long', <!-- แสดงชื่อเดือน -->
+                        day: 'numeric', <!-- แสดงวันในรูปแบบตัวเลข -->
+                        timeZone: 'Asia/Bangkok'<!-- กำหนดเวลา"Asia/Bangkok"เวลาในประเทศไทย -->
+                    }).format(new Date(record.active_date)) %><!--ใช้ format ของ DateTimeFormat เพื่อจัดวันที่ โดยใช้ค่า record.active_date และโชว์กำหนดไว้ -->
+                </td>
+                
+                <td><%= record.status %></td>
+            </tr>
+        <% }) %>
+    </table>
+    <a href="/">กลับไปหน้าเช็คชื่อ</a>
+</body>
+</html>
