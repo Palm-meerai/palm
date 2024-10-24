@@ -1,38 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ข้อมูลเช็คชื่อ</title>
+    <style>
+        body {
+            background-color: #1C1C1C;
+            color: #FFFFFF;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://example.com/harley-background.jpg'); /* Replace with a suitable image URL */
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            color: #FF8C00; /* Harley-Davidson orange */
+            text-shadow: 2px 2px #000000;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #333333;
+            border: 1px solid #444444;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #555555;
+        }
+        th {
+            background-color: #FF8C00; /* Harley-Davidson orange */
+            color: #FFFFFF;
+        }
+        tr:nth-child(even) {
+            background-color: #2E2E2E;
+        }
+        tr:nth-child(odd) {
+            background-color: #3B3B3B;
+        }
+        td {
+            color: #FFFFFF;
+        }
+        a {
+            color: #FF8C00;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 2px solid #FF8C00;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        a:hover {
+            background-color: #FF8C00;
+            color: #000000;
+        }
+    </style>
 </head>
 <body>
-    <!-- https://classroom.google.com/u/1/c/NjkwODk4NzU5ODQ5/m/NzIyODI3NjM3NDc4/details -->
     <h1>ข้อมูลเช็คชื่อ</h1>
     <table>
         <tr>
-            <th>ขื่อ</th>
+            <th>ชื่อ</th>
             <th>นามสกุล</th>
             <th>หลักสูตร</th>
             <th>วันที่เช็คชื่อ</th>
-            <th>Status</th>
-
+            <th>สถานะ</th>
         </tr>
-<!-- https://classroom.google.com/u/1/c/NjkwODk4NzU5ODQ5/m/NzIyODI3NzYzNjE2/details -->
         <% attendanceList.forEach(record => { %>
             <tr>
                 <td><%= record.first_name %></td>
                 <td><%= record.last_name %></td>
                 <td><%= record.short_name_th %></td>
                 <td>
-                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat -->
-                    <%= new Intl.DateTimeFormat('th-TH', { <!-- สร้าง DateTimeFormat ให้ใช้ภาษาของประเทศไทย (th-TH) -->
-                        year: 'numeric', <!-- แสดงปีในรูปแบบตัวเลข -->
-                        month: 'long', <!-- แสดงชื่อเดือน -->
-                        day: 'numeric', <!-- แสดงวันในรูปแบบตัวเลข -->
-                        timeZone: 'Asia/Bangkok'<!-- กำหนดเวลา"Asia/Bangkok"เวลาในประเทศไทย -->
-                    }).format(new Date(record.active_date)) %><!--ใช้ format ของ DateTimeFormat เพื่อจัดวันที่ โดยใช้ค่า record.active_date และโชว์กำหนดไว้ -->
+                    <%= new Intl.DateTimeFormat('th-TH', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        timeZone: 'Asia/Bangkok'
+                    }).format(new Date(record.active_date)) %>
                 </td>
-                
                 <td><%= record.status %></td>
             </tr>
         <% }) %>
